@@ -14,7 +14,7 @@ server.get('/a', (req, res, next)=>{
 
   req.usertype=5;
 
-  throw new Error('aaaa');
+ // throw new Error('aaaa');
 
   next();
 });
