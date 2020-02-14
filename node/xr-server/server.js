@@ -6,10 +6,12 @@ const path=require('path');
 const session=require('koa-session')
 const fs=require('fs')
 const ejs=require('koa-ejs')
+const config=require('./config')
 
 
 let server=new Koa();
-server.listen(8000);
+server.listen(config.PORT);
+console.log(`server running at ${config.PORT}`)
 
 //中间件 koa-better-body
 server.use(body({
@@ -28,6 +30,8 @@ server.use(session({
 
 //数据库，一般单给文件lib/database
 server.context.db=require('./libs/database')
+// 此处将db引入context上,同理可将congfig加到ctx上
+server.context.config=config;
 
 //渲染
 ejs(server,{
@@ -39,19 +43,19 @@ ejs(server,{
 })
 
 //统一处理
-server.use(async (ctx,next)=>{
-    try{
-        await next();
+// server.use(async (ctx,next)=>{
+//     try{
+//         await next();
 
-        //正常的处理 ctx.body
-    }catch(e){
-        // ctx.state=500;
-        // ctx.body='Internal Server Error';
-        // 状态码有问题
+//         //正常的处理 ctx.body
+//     }catch(e){
+//         // ctx.state=500;
+//         // ctx.body='Internal Server Error';
+//         // 状态码有问题
 
-        ctx.throw(500,'Internal Server Error')
-    }
-})
+//         ctx.throw(500,'Internal Server Error')
+//     }
+// })
 
 
 //路由和static 
