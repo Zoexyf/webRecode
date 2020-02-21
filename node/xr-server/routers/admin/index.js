@@ -78,13 +78,29 @@ router.get('/banner',async ctx=>{
     let datas=await ctx.db.query(`SELECT * FROM ${table}`)
     ctx.body=datas;
 
-    // await ctx.render('admin/table',{
-    //     HTTP_ROOT,
+    await ctx.render('admin/table',{
+        HTTP_ROOT,
+        datas,
+        action:`${HTTP_ROOT}/admin/banner`,
+        // index.js中的fields可以从数据库中读出来，用于动态维护，
+        fields:[
+            {name:'title',type:'text'},
+            {name:'src',type:'file'},
+            {name:'href',type:'text'},
+            {name:'serial',type:'number'},
+        ]
         
 
-    // })
+    })
 
 })
+router.post('/banner',ctx=>{
+
+    // fields完全来自于server.js中的koa-better-body
+    let {title,src,href,serial}=ctx.request.fields;
+    console.log(title,src,href,serial)
+})
+
 
 router.get('/catalog',async ctx=>{
     

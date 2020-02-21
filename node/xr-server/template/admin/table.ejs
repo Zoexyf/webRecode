@@ -19,7 +19,7 @@
       <li role="presentation"><a href="#">页面3</a></li>
     </ul>
     <!--表格-->
-    <% if(type=='view'){ %>
+    <!-- <% if(type=='view'){ %> -->
     <a href="#" class="btn btn-primary glyphicon glyphicon-plus" id="btn_add">添加</a>
     <table class="table">
       <thead>
@@ -64,17 +64,19 @@
     <div class="panel panel-default my-panel">
       <div class="panel-heading">
         <div class="panel-title">
-          <%=type=='view'?'添加':'修改'%>
+          <!-- <%=type=='view'?'添加':'修改'%> -->
         </div>
       </div>
       <div class="panel-body">
+        <!-- 考虑到有可能是文件 enctype="multipart/form-data" anction 被设置好 -->
         <form class="form form-horizontal" action="<%=action%>" method="post" enctype="multipart/form-data">
 
+          <!-- fields中循环出来就是field -->
           <%fields.forEach(field=>{%>
           <div class="form-group">
             <label class="col-sm-2 control-label"><%=field.title%></label>
             <div class="col-sm-10">
-              <input type="<%=field.type%>" class="form-control" <%if(type=='modify'){%>value="<%=old_data[field.name]%>"<%}%> name="<%=field.name%>" placeholder="<%=field.title%>">
+              <!-- <input type="<%=field.type%>" class="form-control" <%if(type=='modify'){%>value="<%=old_data[field.name]%>"<%}%> name="<%=field.name%>" placeholder="<%=field.title%>"> -->
             </div>
           </div>
           <%})%>
@@ -114,9 +116,9 @@
     $('.my-panel, .my-panel-shadow').show();
   });
   </script>
-  <% if(type=='modify'){ %>
+  <!-- <% if(type=='modify'){ %>
   <script>
   $('.my-panel, .my-panel-shadow').show();
   </script>
-  <% } %>
+  <% } %> -->
 </html>

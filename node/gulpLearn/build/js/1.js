@@ -1,0 +1,1 @@
+"use strict";var a=12,b=5;alert(a+b);

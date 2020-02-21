@@ -1,0 +1,5 @@
+const gulp=require('gulp')
+const livereload=require('gulp-livereload')
+const babel=require('gulp-babel')
+const uglity=require('gulp-uglify')
+const concat=require('gulp-concat')
